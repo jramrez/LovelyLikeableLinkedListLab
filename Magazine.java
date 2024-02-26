@@ -21,4 +21,7 @@ public class Magazine {
         }
     }
     
+    public String getName() {
+        return magName;
+    }
 }
