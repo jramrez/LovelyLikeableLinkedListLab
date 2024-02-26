@@ -19,8 +19,8 @@ public class ListNode {
         return nodeItem;
     }
 
-    public Object getNextNode() {
-        return nextNode.getThisNode();
+    public ListNode getNextNode() {
+        return nextNode;
     }
 
     public void setNewNode(ListNode node) {

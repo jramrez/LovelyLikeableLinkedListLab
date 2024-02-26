@@ -15,7 +15,7 @@ public class Magazine {
     }
 
     public void printMagazine() {
-        System.out.println(magName + " " + magIssue);
+        System.out.println(magName + ", issue " + magIssue);
         if (magPublisher != null) {
             System.out.println("The publisher is " + magPublisher);
         }
