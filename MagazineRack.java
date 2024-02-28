@@ -24,22 +24,22 @@ public class MagazineRack {
         traveler.setNewNode(new ListNode(mag, null));
     } 
 
-    public void addMagazineBefore(Magazine target, Magazine mag){
+    public void addMagazine(int target, Magazine mag){
         traveler = head;
-        while (traveler.getThisNode() != target) {
-            follower = traveler;
-            traveler = traveler.getNextNode(); 
+        int counter = 0;
+        if (target == 0) {
+            head = new ListNode(mag, traveler);
         }
-        follower.setNewNode(new ListNode(mag, traveler));
+        else {    
+            while (counter != target) {
+                follower = traveler;
+                traveler = traveler.getNextNode();
+                counter++; 
+            }
+            follower.setNewNode(new ListNode(mag, traveler));
+        }
     } 
 
-    public void addMagazineAfter(Magazine target, Magazine mag){
-        traveler = head;
-        while (traveler.getThisNode() != target) {
-            traveler = traveler.getNextNode(); 
-        }
-        traveler.setNewNode(new ListNode(mag, traveler.getNextNode()));
-    } 
 
     public void displayRack(){
         traveler = head;
