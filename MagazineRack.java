@@ -26,15 +26,13 @@ public class MagazineRack {
 
     public void addMagazine(int target, Magazine mag){
         traveler = head;
-        int counter = 0;
         if (target == 0) {
             head = new ListNode(mag, traveler);
         }
         else {    
-            while (counter != target) {
+            for(int counter = 0; counter != target; counter++) {
                 follower = traveler;
-                traveler = traveler.getNextNode();
-                counter++; 
+                traveler = traveler.getNextNode(); 
             }
             follower.setNewNode(new ListNode(mag, traveler));
         }
