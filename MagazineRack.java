@@ -1,19 +1,23 @@
 public class MagazineRack {
     ListNode traveler;
     ListNode follower;
-    static ListNode head = new ListNode(new Magazine("To Work A Magazine Rack", 1), null);
+    static ListNode head = new ListNode(new Magazine("To Work A Magazine Rack", 1), null, null);
 
     public MagazineRack(){}
 
-    public void removeMagazine(Magazine mag){
+    public void removeMagazine(int index){
         traveler = head;
-        
-        while (traveler.getThisNode() != mag) {
+        if (index == 0) {
+            head = traveler.getNextNode();
+        }
+        else {
+            for(int counter = 0; counter != index; counter++) {
             follower = traveler;
             traveler = traveler.getNextNode();
+            }
+            traveler = traveler.getNextNode();
+            follower.setNextNode(traveler);
         }
-        traveler = traveler.getNextNode();
-        follower.setNewNode(traveler);
     }
 
     public void addMagazine(Magazine mag){
@@ -21,20 +25,20 @@ public class MagazineRack {
         while (traveler.getNextNode() != null) {
             traveler = traveler.getNextNode(); 
         }
-        traveler.setNewNode(new ListNode(mag, null));
+        traveler.setNextNode(new ListNode(mag, null));
     } 
 
-    public void addMagazine(int target, Magazine mag){
+    public void addMagazine(int index, Magazine mag){
         traveler = head;
-        if (target == 0) {
+        if (index == 0) {
             head = new ListNode(mag, traveler);
         }
         else {    
-            for(int counter = 0; counter != target; counter++) {
+            for(int counter = 0; counter != index; counter++) {
                 follower = traveler;
                 traveler = traveler.getNextNode(); 
             }
-            follower.setNewNode(new ListNode(mag, traveler));
+            follower.setNextNode(new ListNode(mag, traveler));
         }
     } 
 

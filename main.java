@@ -5,6 +5,8 @@ class Main {
         rack1.addMagazine(new Magazine("TIMES", 1020));
         rack1.addMagazine(0, new Magazine("Old York Times", 20));
         rack1.displayRack();
+        rack1.removeMagazine(1);
+        rack1.displayRack();
 
     }
 }
