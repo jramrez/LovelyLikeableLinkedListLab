@@ -17,6 +17,7 @@ public class MagazineRack {
             }
             traveler = traveler.getNextNode();
             follower.setNextNode(traveler);
+            traveler.setPrevNode(follower);
         }
     }
 
@@ -25,32 +26,81 @@ public class MagazineRack {
         while (traveler.getNextNode() != null) {
             traveler = traveler.getNextNode(); 
         }
-        traveler.setNextNode(new ListNode(mag, null));
+        traveler.setNextNode(new ListNode(mag, null, traveler));
+        head.setPrevNode(traveler.getNextNode());
     } 
 
     public void addMagazine(int index, Magazine mag){
         traveler = head;
         if (index == 0) {
-            head = new ListNode(mag, traveler);
+            head = new ListNode(mag, traveler, head.getPrevNode());
+            traveler.setPrevNode(head);
         }
         else {    
             for(int counter = 0; counter != index; counter++) {
                 follower = traveler;
                 traveler = traveler.getNextNode(); 
             }
-            follower.setNextNode(new ListNode(mag, traveler));
+            follower.setNextNode(new ListNode(mag, traveler, follower));
         }
     } 
 
 
-    public void displayRack(){
+    public void displayRack(char mode) {
         traveler = head;
-        ((Magazine)traveler.getThisNode()).printMagazine();
-        do {
-            traveler = traveler.getNextNode();
+        if (mode == 'F') {
             ((Magazine)traveler.getThisNode()).printMagazine();
+            do {
+                traveler = traveler.getNextNode();
+                ((Magazine)traveler.getThisNode()).printMagazine();
+            }
+            while (traveler.getNextNode() != null);
         }
-        while (traveler.getNextNode() != null);
-            
+        else if (mode == 'B') {
+            traveler = head.getPrevNode();
+            ((Magazine)traveler.getThisNode()).printMagazine();
+            do {
+                traveler = traveler.getPrevNode();
+                ((Magazine)traveler.getThisNode()).printMagazine();
+            }
+            while (traveler.getPrevNode() != head);
+        }
+        else {
+            System.out.println("Invalid Mode");
+        }
+    }
+
+    public void displayRackLoop(int loops, char mode) {
+        traveler = head.getPrevNode();
+        traveler.setNextNode(head);
+        traveler = head;
+        int counter = 0;
+        if (mode == 'F') {
+            ((Magazine)traveler.getThisNode()).printMagazine();
+            do {
+                traveler = traveler.getNextNode();
+                ((Magazine)traveler.getThisNode()).printMagazine();
+                if (traveler.equals(head)) {
+                    counter++;
+                }
+            }
+            while (counter != loops);
+        }
+        else if (mode == 'B') {
+            ((Magazine)traveler.getThisNode()).printMagazine();
+            do {
+                traveler = traveler.getPrevNode();
+                ((Magazine)traveler.getThisNode()).printMagazine();
+                if (traveler.equals(head)) {
+                    counter++;
+                }
+            }
+            while (counter != loops);
+        }
+        else {
+            System.out.println("Invalid Mode");
+        }
+        traveler = head.getPrevNode();
+        traveler.setNextNode(null);
     }
 }
